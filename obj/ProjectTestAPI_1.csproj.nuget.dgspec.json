@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/mckoog/MyProjects/ProjectTestAPI_1/ProjectTestAPI_1.csproj": {}
+    "C:\\Users\\podrezov\\Downloads\\ProjectTestAPI_1\\ProjectTestAPI_1\\ProjectTestAPI_1.csproj": {}
   },
   "projects": {
-    "/home/mckoog/MyProjects/ProjectTestAPI_1/ProjectTestAPI_1.csproj": {
+    "C:\\Users\\podrezov\\Downloads\\ProjectTestAPI_1\\ProjectTestAPI_1\\ProjectTestAPI_1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mckoog/MyProjects/ProjectTestAPI_1/ProjectTestAPI_1.csproj",
+        "projectUniqueName": "C:\\Users\\podrezov\\Downloads\\ProjectTestAPI_1\\ProjectTestAPI_1\\ProjectTestAPI_1.csproj",
         "projectName": "ProjectTestAPI_1",
-        "projectPath": "/home/mckoog/MyProjects/ProjectTestAPI_1/ProjectTestAPI_1.csproj",
-        "packagesPath": "/home/mckoog/.nuget/packages/",
-        "outputPath": "/home/mckoog/MyProjects/ProjectTestAPI_1/obj/",
+        "projectPath": "C:\\Users\\podrezov\\Downloads\\ProjectTestAPI_1\\ProjectTestAPI_1\\ProjectTestAPI_1.csproj",
+        "packagesPath": "C:\\Users\\podrezov\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\podrezov\\Downloads\\ProjectTestAPI_1\\ProjectTestAPI_1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/mckoog/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\podrezov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,9 +40,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "JsonConverters.Collections": {
+              "target": "Package",
+              "version": "[3.2.355, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[6.0.2, )"
             },
             "Ydb.Sdk": {
               "target": "Package",
@@ -57,12 +67,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.2, 6.0.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -71,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
