@@ -686,26 +686,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\podrezov\\.nuget\\packages\\": {}
+    "/home/mckoog/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\podrezov\\Downloads\\ProjectTestAPI_1\\ProjectTestAPI_1\\ProjectTestAPI_1.csproj",
+      "projectUniqueName": "/home/mckoog/MyProjects/ProjectsVSC/ProjectTestAPI_1/ProjectTestAPI_1.csproj",
       "projectName": "ProjectTestAPI_1",
-      "projectPath": "c:\\Users\\podrezov\\Downloads\\ProjectTestAPI_1\\ProjectTestAPI_1\\ProjectTestAPI_1.csproj",
-      "packagesPath": "C:\\Users\\podrezov\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\podrezov\\Downloads\\ProjectTestAPI_1\\ProjectTestAPI_1\\obj\\",
+      "projectPath": "/home/mckoog/MyProjects/ProjectsVSC/ProjectTestAPI_1/ProjectTestAPI_1.csproj",
+      "packagesPath": "/home/mckoog/.nuget/packages/",
+      "outputPath": "/home/mckoog/MyProjects/ProjectsVSC/ProjectTestAPI_1/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\podrezov\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/mckoog/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -751,6 +749,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.2, 6.0.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -759,7 +763,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
       }
     }
   }

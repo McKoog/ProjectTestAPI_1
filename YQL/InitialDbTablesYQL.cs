@@ -32,6 +32,19 @@ namespace ProjectTestAPI_1.YQL
                     fullname Utf8,
                     PRIMARY KEY (fuel_id)
                 );
+                    CREATE TABLE StationsFuels (
+                    id Uint64,
+                    station_id Uint64,
+                    fuel_id Uint64,
+                    PRIMARY KEY (id)
+                );
+                    CREATE TABLE StationsPrices (
+                    id Uint64,
+                    station_id Uint64,
+                    fuel_id Uint64,
+                    price double,
+                    PRIMARY KEY (id)
+                );
                 ");
             });
             return response;
