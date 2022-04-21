@@ -91,16 +91,17 @@ namespace ProjectTestAPI_1.YQL
             response.Wait();
             ExecuteDataQueryResponse resp = (ExecuteDataQueryResponse)response.Result;
             var x = resp.Result.ResultSets[0].Rows;
-            string s = "";
+            string s = "[\n";
             for(int z = 0;z < x.Count();z++){
             Station station = new Station(x[z][0].GetOptional().GetUint64(),
                                           x[z][1].GetOptional().GetBool(),
                                           x[z][2].GetOptionalUtf8().ToString(),
                                           x[z][3].GetOptionalUtf8().ToString(),
                                           JsonSerializer.Deserialize<Location>(x[z][4].GetOptionalJson().ToString()));
-                               s += JsonSerializer.Serialize(station) + ", \n";           
+                               if(z != x.Count - 1){s += JsonSerializer.Serialize(station) + ", \n";}
+                               else {s += JsonSerializer.Serialize(station) + "\n";}         
             }
-            return s;
+            return s + "]";
         }        
     }
 }

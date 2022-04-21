@@ -45,6 +45,15 @@ namespace ProjectTestAPI_1.YQL
                     price double,
                     PRIMARY KEY (id)
                 );
+                    CREATE TABLE Users (
+                    user_id Uint64,
+                    name Utf8,
+                    email Utf8,
+                    password Utf8,
+                    phone Utf8,
+                    token Utf8,
+                    PRIMARY KEY (user_id)
+                );
                 ");
             });
             return response;
