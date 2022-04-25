@@ -44,5 +44,23 @@ namespace ProjectTestAPI_1.Controllers
         {
             return yql.LoginUser(email,password);
         }
+        [HttpGet]
+        [Route("GetUserSettingsFromToken")]
+        public string GetUserSettingsFromToken(
+            [Required()]string token)
+        {
+            return yql.GetUserSettingsFromToken(token);
+        }
+        [HttpPost]
+        [Route("ChangeUserSettings")]
+        public Task<IResponse> ChangeUserSettings(
+            [Required()]string token,
+            [Required()]string name,
+            [Required()]string email,
+            [Required()]string fuelType,
+            [Required()]string fuelSize)
+        {
+            return yql.ChangeUserSettings(token,name,email,fuelType,fuelSize);
+        }
     }
 }

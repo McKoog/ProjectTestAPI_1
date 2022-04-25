@@ -52,6 +52,8 @@ namespace ProjectTestAPI_1.YQL
                     password Utf8,
                     phone Utf8,
                     token Utf8,
+                    fuelType Utf8,
+                    fuelSize Utf8,
                     PRIMARY KEY (user_id)
                 );
                 ");
