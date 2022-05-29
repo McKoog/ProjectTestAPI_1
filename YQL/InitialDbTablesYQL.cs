@@ -56,6 +56,43 @@ namespace ProjectTestAPI_1.YQL
                     fuelSize Utf8,
                     PRIMARY KEY (user_id)
                 );
+                CREATE TABLE Orders (
+                    order_id Uint64,
+                    dateCreate DateTime,
+                    orderType Utf8,
+                    orderVolume double,
+                    stationId Uint64,
+                    stationExtendedId Uint64,
+                    columnId Uint64,
+                    fuelId Uint64,
+                    fuelMarka Utf8,
+                    priceId Uint64,
+                    fuelExtendedId Uint64, 
+                    priceFuel double, 
+                    sum double,
+                    litres double,
+                    sumPaid double, 
+                    orderStaus Utf8,
+                    message Utf8, 
+                    dateEnd DateTime,
+                    reasonId Uint64, 
+                    reason Utf8, 
+                    litreCompleted double, 
+                    sumPaidCompleted double, 
+                    contractId Utf8, 
+                    commisionPercent double, 
+                    sumWithoutComission double, 
+                    mAppVote Uint64, 
+                    userNote Utf8, 
+                    discount double, 
+                    discountedPrice double, 
+                    discountSystemId Uint64, 
+                    discountCardId Uint64, 
+                    bonusesAdded Uint64, 
+                    bonusesSpent Uint64,
+                    bonusPrice double,
+                    PRIMARY KEY (order_id)
+                );
                 ");
             });
             return response;
