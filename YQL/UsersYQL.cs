@@ -7,9 +7,9 @@ using ProjectTestAPI_1.Models;
 
 namespace ProjectTestAPI_1.YQL
 {
-    public class UserYQL
+    public class UsersYQL
     {
-        public UserYQL(TableClient client)
+        public UsersYQL(TableClient client)
         {
             this.client = client;
         }

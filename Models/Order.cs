@@ -2,6 +2,34 @@ namespace ProjectTestAPI_1.Models
 {
     public class Order
     {
+        public Order(
+            ulong id, 
+            DateTime dateCreate,
+             string orderType,
+             double orderVolume,
+             ulong stationId,
+             ulong columnId,
+             ulong fuelId,
+             string fuelMarka,
+             ulong priceId,
+             double priceFuel,
+             double sum,
+             double litres,
+             string contractId)
+        {
+            DateCreate = dateCreate;
+            OrderType = orderType;
+            orderVolume = OrderVolume;
+            StationId = stationId;
+            ColumnId = columnId;
+            FuelId = fuelId;
+            FuelMarka = fuelMarka;
+            PriceId = priceId;
+            PriceFuel = priceFuel;
+            Sum = sum;
+            Litres = litres;
+            ContractId = contractId;
+        }
         public ulong Id { get; set; }
         
         public DateTime DateCreate { get; set; }

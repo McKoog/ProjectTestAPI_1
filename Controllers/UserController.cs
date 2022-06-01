@@ -17,11 +17,11 @@ namespace ProjectTestAPI_1.Controllers
     public class UserController : ControllerBase
     {
         private TableClient client = MyYDBService.Client;
-        private UserYQL yql;
+        private UsersYQL yql;
         private readonly ILogger<UserController> _logger;
         public UserController(ILogger<UserController> logger)
         {
-            yql = new UserYQL(client);
+            yql = new UsersYQL(client);
             _logger = logger;
         }
         [HttpPost]

@@ -1,8 +1,8 @@
 namespace ProjectTestAPI_1
 {
-    public class StationFuels_JsonByStation
+    public class StationFuel_JsonByStation
     {
-        public StationFuels_JsonByStation(ulong id,ulong stationId,ulong fuelId)
+        public StationFuel_JsonByStation(ulong id,ulong stationId,ulong fuelId)
         {
             Id = id;
             StationId = stationId;
@@ -15,9 +15,9 @@ namespace ProjectTestAPI_1
         
     }
 
-    public class StationFuels_JsonByFuel 
+    public class StationFuel_JsonByFuel 
     {
-        public StationFuels_JsonByFuel(ulong id,ulong fuelId,ulong stationId)
+        public StationFuel_JsonByFuel(ulong id,ulong fuelId,ulong stationId)
         {
             Id = id;
             FuelId = fuelId;

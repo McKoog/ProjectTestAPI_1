@@ -6,14 +6,14 @@ using Ydb.Sdk.Value;
 
 namespace ProjectTestAPI_1.YQL
 {
-    public class StationsPricesYQL
+    public class StationsFuelsYQL
     {
-        public StationsPricesYQL(TableClient client)
+        public StationsFuelsYQL(TableClient client)
         {
             this.client = client;
         }
         private TableClient client = MyYDBService.Client;
-        public Task<IResponse> CreateStationPrice(ulong id,ulong stationId, ulong fuelId, double price){
+        public Task<IResponse> CreateStationFuel(ulong id,ulong stationId, ulong fuelId){
 
             var response =  client.SessionExec(async session =>
                 {
@@ -21,10 +21,9 @@ namespace ProjectTestAPI_1.YQL
                     DECLARE $id AS Uint64;
                     DECLARE $station_id AS Uint64;
                     DECLARE $fuel_id AS Uint64;
-                    DECLARE $price as double;
 
-                    UPSERT INTO StationsPrices (id,station_id, fuel_id, price) VALUES
-                    ($id,$station_id, $fuel_id, $price);
+                    UPSERT INTO StationsFuels (id,station_id, fuel_id) VALUES
+                    ($id,$station_id, $fuel_id);
                 ";
 
             return await session.ExecuteDataQuery(
@@ -35,17 +34,16 @@ namespace ProjectTestAPI_1.YQL
                     { "$id", YdbValue.MakeUint64(id) },
                     { "$station_id", YdbValue.MakeUint64(stationId) },
                     { "$fuel_id", YdbValue.MakeUint64(fuelId)},
-                    { "$price", YdbValue.MakeDouble(price)},
                 }
             );
             });
             return response;
         }
-        public string GetStationsPrices_byFuelId(ulong fuel_id){
+        public string GetStations_byFuelId(ulong fuel_id){
             var response =  client.SessionExec(async session =>
                 {
                     var query = @$"
-                    SELECT id,fuel_id,station_id,price FROM StationsPrices WHERE fuel_id == {fuel_id}
+                    SELECT id,fuel_id,station_id FROM StationsFuels WHERE fuel_id == {fuel_id}
                 ";
 
             return await session.ExecuteDataQuery(
@@ -61,20 +59,19 @@ namespace ProjectTestAPI_1.YQL
             var x = resp.Result.ResultSets[0].Rows;
             string s = "";
             for(int z = 0;z < x.Count();z++){
-            StationPrice_JsonByFuelId stationPrices = new StationPrice_JsonByFuelId(
+            StationFuel_JsonByFuel stationFuels = new StationFuel_JsonByFuel(
                 x[z][0].GetOptional().GetUint64(),
                 x[z][1].GetOptional().GetUint64(),
-                x[z][2].GetOptional().GetUint64(),
-                x[z][3].GetOptional().GetDouble());
-                    s += JsonSerializer.Serialize(stationPrices) + ", \n";           
+                x[z][2].GetOptional().GetUint64());
+                    s += JsonSerializer.Serialize(stationFuels) + ", \n";           
             }
             return s;
         }
-        public string GetStationsPrices_byStationId(ulong station_id){
+        public string GetStations_byStationId(ulong station_id){
             var response =  client.SessionExec(async session =>
                 {
                     var query = @$"
-                    SELECT id,station_id,fuel_id,price FROM StationsPrices WHERE station_id == {station_id}
+                    SELECT id,station_id,fuel_id FROM StationsFuels WHERE station_id == {station_id}
                 ";
 
             return await session.ExecuteDataQuery(
@@ -90,20 +87,19 @@ namespace ProjectTestAPI_1.YQL
             var x = resp.Result.ResultSets[0].Rows;
             string s = "";
             for(int z = 0;z < x.Count();z++){
-            StationPrice_JsonByStationId stationPrices = new StationPrice_JsonByStationId(
+            StationFuel_JsonByStation stationFuels = new StationFuel_JsonByStation(
                 x[z][0].GetOptional().GetUint64(),
                 x[z][1].GetOptional().GetUint64(),
-                x[z][2].GetOptional().GetUint64(),
-                x[z][3].GetOptional().GetDouble());
-                    s += JsonSerializer.Serialize(stationPrices) + ", \n";           
+                x[z][2].GetOptional().GetUint64());
+                    s += JsonSerializer.Serialize(stationFuels) + ", \n";           
             }
             return s;
         }
-        public string GetStationsPrices(){
+        public string GetStationsFuels(){
             var response =  client.SessionExec(async session =>
                 {
                     var query = @$"
-                    SELECT id,station_id,fuel_id,price FROM StationsPrices
+                    SELECT id,station_id,fuel_id FROM StationsFuels
                 ";
 
             return await session.ExecuteDataQuery(
@@ -119,11 +115,10 @@ namespace ProjectTestAPI_1.YQL
             var x = resp.Result.ResultSets[0].Rows;
             string s = "";
             for(int z = 0;z < x.Count();z++){
-            StationPrice_JsonByStationId stationFuels = new StationPrice_JsonByStationId(
+            StationFuel_JsonByStation stationFuels = new StationFuel_JsonByStation(
                 x[z][0].GetOptional().GetUint64(),
                 x[z][1].GetOptional().GetUint64(),
-                x[z][2].GetOptional().GetUint64(),
-                x[z][3].GetOptional().GetDouble());
+                x[z][2].GetOptional().GetUint64());
                     s += JsonSerializer.Serialize(stationFuels) + ", \n";           
             }
             return s;

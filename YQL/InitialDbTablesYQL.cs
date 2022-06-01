@@ -56,6 +56,19 @@ namespace ProjectTestAPI_1.YQL
                     fuelSize Utf8,
                     PRIMARY KEY (user_id)
                 );
+                CREATE TABLE StationsFuelPoints (
+                    id Uint64,
+                    station_id Uint64,
+                    fuelPoint_id Uint64,
+                    PRIMARY KEY (id)
+                );
+                CREATE TABLE FuelPointsNozzles (
+                    id Uint64,
+                    fuelPoint_id Uint64,
+                    nozzle_id Uint64,
+                    fuel_id Uint64,
+                    PRIMARY KEY (id)
+                );
                 CREATE TABLE Orders (
                     order_id Uint64,
                     dateCreate DateTime,

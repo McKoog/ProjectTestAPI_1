@@ -1,8 +1,8 @@
 namespace ProjectTestAPI_1
 {
-    public class StationPrices_JsonByFuelId
+    public class StationPrice_JsonByFuelId
     {
-        public StationPrices_JsonByFuelId(ulong id, ulong fuelId, ulong stationId, double price)
+        public StationPrice_JsonByFuelId(ulong id, ulong fuelId, ulong stationId, double price)
         {
             Id = id;
             FuelId = fuelId;
@@ -15,9 +15,9 @@ namespace ProjectTestAPI_1
         public double Price { get; set; }       
         
     }
-    public class StationPrices_JsonByStationId
+    public class StationPrice_JsonByStationId
     {
-        public StationPrices_JsonByStationId(ulong id, ulong stationId,ulong fuelId, double price)
+        public StationPrice_JsonByStationId(ulong id, ulong stationId,ulong fuelId, double price)
         {
             Id = id;
             StationId = stationId;

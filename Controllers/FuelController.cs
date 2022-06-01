@@ -13,13 +13,13 @@ namespace ProjectTestAPI_1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class FuelsController : ControllerBase
+    public class FuelController : ControllerBase
     {
-        private readonly ILogger<FuelsController> _logger;
+        private readonly ILogger<FuelController> _logger;
         private TableClient client = MyYDBService.Client;
         private FuelsYQL yql;
 
-        public FuelsController(ILogger<FuelsController> logger)
+        public FuelController(ILogger<FuelController> logger)
         {
         _logger = logger;
         yql = new FuelsYQL(client);
@@ -30,7 +30,8 @@ namespace ProjectTestAPI_1.Controllers
         public Task<IResponse> CreateFuel(
             [Required()] ulong id,
             [Required()] string name,
-            [Required()] string fullname)
+            [Required()] string fullname
+            )
         {
             return yql.CreateFuel(id,name,fullname);
         }

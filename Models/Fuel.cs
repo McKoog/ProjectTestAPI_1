@@ -1,8 +1,8 @@
 namespace ProjectTestAPI_1
 {
-    public class Fuels
+    public class Fuel
     {
-        public Fuels(ulong id, string name, string fullName)
+        public Fuel(ulong id, string name, string fullName)
         {
             FuelId = id;
             Name = name;

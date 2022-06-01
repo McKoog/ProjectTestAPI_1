@@ -13,12 +13,12 @@ namespace ProjectTestAPI_1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class StationsPricesController
+    public class StationPricesController
     {
         private TableClient client = MyYDBService.Client;
         private StationsPricesYQL yql;
-        private readonly ILogger<StationsPricesController> _logger;
-        public StationsPricesController(ILogger<StationsPricesController> logger)
+        private readonly ILogger<StationPricesController> _logger;
+        public StationPricesController(ILogger<StationPricesController> logger)
         {
             yql = new StationsPricesYQL(client);
             _logger = logger;
