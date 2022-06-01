@@ -16,16 +16,16 @@ namespace ProjectTestAPI_1.Controllers
     public class StationFuelsController : ControllerBase
     {
         private TableClient client = MyYDBService.Client;
-        private StationFuelsYQL yql;
+        private StationsFuelsYQL yql;
         private readonly ILogger<StationFuelsController> _logger;
         public StationFuelsController(ILogger<StationFuelsController> logger)
         {
-            yql = new StationFuelsYQL(client);
+            yql = new StationsFuelsYQL(client);
             _logger = logger;
         }
         [HttpPost]
         [Route("CreateStationFuel")]
-        public Task<IResponse> CreateStation(
+        public Task<IResponse> CreateStationFuel(
             [Required()]ulong id,
             [Required()]ulong station_id,
             [Required()]ulong fuel_id)
