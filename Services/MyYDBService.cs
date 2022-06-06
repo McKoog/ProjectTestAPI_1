@@ -6,8 +6,10 @@ namespace ProjectTestAPI_1.Services
 {
     public class MyYDBService : IHostedService
     {
-         public static Driver driver;
+        public static List<string> fuelNames = new List<string> {"diesel", "a92", "a95", "a98"};
+        public static Driver driver;
         public static TableClient Client;
+         
         public Task StartAsync(CancellationToken cancellationToken)
         {
             driver = YDB.YDB.MakeDriver("grpc://localhost:2136","/local",YDB.YDB.MakeProvider());

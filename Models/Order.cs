@@ -4,6 +4,7 @@ namespace ProjectTestAPI_1.Models
     {
         public Order(
             ulong id, 
+            ulong clientId,
             DateTime dateCreate,
              string orderType,
              double orderVolume,
@@ -17,6 +18,8 @@ namespace ProjectTestAPI_1.Models
              double litres,
              string contractId)
         {
+            Id = id;
+            ClientId = clientId;
             DateCreate = dateCreate;
             OrderType = orderType;
             orderVolume = OrderVolume;
@@ -31,6 +34,7 @@ namespace ProjectTestAPI_1.Models
             ContractId = contractId;
         }
         public ulong Id { get; set; }
+        public ulong ClientId { get; set; }
         
         public DateTime DateCreate { get; set; }
         

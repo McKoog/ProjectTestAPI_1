@@ -5,9 +5,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
-    <PackageReference Include="Ydb.Sdk" Version="0.0.5"/>
-    <PackageReference Include="JsonConverters.Collections" Version="3.2.355"/>
-    <PackageReference Include="System.Text.Json" Version="6.0.2"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Ydb.Sdk" Version="0.0.5" />
+    <PackageReference Include="JsonConverters.Collections" Version="3.2.355" />
+    <PackageReference Include="System.Text.Json" Version="6.0.2" />
   </ItemGroup>
 </Project>
