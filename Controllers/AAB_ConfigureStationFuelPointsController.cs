@@ -2,11 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectTestAPI_1.Models;
 using System.Text.Json;
 using ProjectTestAPI_1.SQLiteDb.Repository;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ProjectTestAPI_1.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("ConfigureStationFuelPointsController")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "administrator")]
     public class AAB_ConfigureStationFuelPointsController : ControllerBase
     {
         private readonly ILogger<AAB_ConfigureStationFuelPointsController> _logger;

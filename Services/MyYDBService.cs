@@ -1,4 +1,3 @@
-using ProjectTestAPI_1.YDB;
 using Ydb.Sdk;
 using Ydb.Sdk.Table;
 

@@ -1,8 +1,6 @@
-using System.Text.Json;
 using ProjectTestAPI_1.Services;
 using Ydb.Sdk.Client;
 using Ydb.Sdk.Table;
-using Ydb.Sdk.Value;
 
 namespace ProjectTestAPI_1.YQL
 {
@@ -36,6 +34,7 @@ namespace ProjectTestAPI_1.YQL
                     id Uint64,
                     station_id Uint64,
                     fuel_id Uint64,
+                    fuel_name Utf8,
                     PRIMARY KEY (id)
                 );
                     CREATE TABLE StationsPrices (
@@ -54,6 +53,7 @@ namespace ProjectTestAPI_1.YQL
                     token Utf8,
                     fuelType Utf8,
                     fuelSize Utf8,
+                    role Utf8,
                     PRIMARY KEY (user_id)
                 );
                 CREATE TABLE StationsFuelPoints (

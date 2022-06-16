@@ -1,14 +1,15 @@
-using System.Xml;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Mvc;
 using ProjectTestAPI_1.Services;
 using Ydb.Sdk.Client;
 using Ydb.Sdk.Table;
-using Ydb.Sdk.Value;
 using ProjectTestAPI_1.YQL;
 using System.ComponentModel.DataAnnotations;
-using ProjectTestAPI_1.Models;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ProjectTestAPI_1.Controllers
 {
@@ -19,10 +20,12 @@ namespace ProjectTestAPI_1.Controllers
         private TableClient client = MyYDBService.Client;
         private UsersYQL yql;
         private readonly ILogger<UserController> _logger;
-        public UserController(ILogger<UserController> logger)
+        private IConfiguration _config;
+        public UserController(ILogger<UserController> logger,IConfiguration config)
         {
             yql = new UsersYQL(client);
             _logger = logger;
+            _config = config;
         }
         [HttpPost]
         [Route("RegisterUser")]
@@ -31,10 +34,12 @@ namespace ProjectTestAPI_1.Controllers
             [Required()]string name,
             [Required()]string email,
             [Required()]string password,
-            [Required()]string phone)
+            [Required()]string phone,
+            [Required()]string role
+            )
         {
             var userGUID = Guid.NewGuid();
-            return yql.RegisterUser(id,name,email,password,phone,userGUID.ToString());
+            return yql.RegisterUser(id,name,email,password,phone,userGUID.ToString(),role);
         }
         [HttpGet]
         [Route("LoginUser")]
@@ -42,10 +47,42 @@ namespace ProjectTestAPI_1.Controllers
             [Required()]string email,
             [Required()]string password)
         {
-            return yql.LoginUser(email,password);
+            var loggedUser = yql.LoginUser(email,password);
+            return loggedUser.Token;
+        }
+        [HttpGet]
+        [Route("AuthorizeApiUser")]
+        public string AuthorizeApiUser(
+            [Required()]string token)
+        {
+            var loggedUser = yql.GetUserAuthorizeData(token);
+            
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, loggedUser.UserId.ToString()),
+                new Claim(ClaimTypes.Name, loggedUser.Name),
+                new Claim(ClaimTypes.MobilePhone, loggedUser.Phone),
+                new Claim(ClaimTypes.Thumbprint, loggedUser.Token),
+                new Claim(ClaimTypes.Role, loggedUser.Role)
+            };
+
+            var jwtToken = new JwtSecurityToken(
+                issuer:  _config["Jwt:issuer"],
+                audience:  _config["Jwt:audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddDays(30),
+                notBefore: DateTime.UtcNow,
+                signingCredentials: new SigningCredentials(
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"])),
+                    SecurityAlgorithms.HmacSha256
+                )
+            );
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+            return tokenString;
         }
         [HttpGet]
         [Route("GetUserSettingsFromToken")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "administrator,standart")]
         public string GetUserSettingsFromToken(
             [Required()]string token)
         {
@@ -53,6 +90,7 @@ namespace ProjectTestAPI_1.Controllers
         }
         [HttpPost]
         [Route("ChangeUserSettings")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "administrator,standart")]
         public Task<IResponse> ChangeUserSettings(
             [Required()]string token,
             [Required()]string name,

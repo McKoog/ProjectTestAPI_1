@@ -128,5 +128,36 @@ namespace ProjectTestAPI_1.YQL
             }
             return s;
         }
+
+        public List<StationPrice_JsonByStationId> GetStationsPrices_ListOfObjects_NotJson(ulong station_id){
+            var response =  client.SessionExec(async session =>
+                {
+                    var query = @$"
+                    SELECT id,station_id,fuel_id,price FROM StationsPrices WHERE station_id == {station_id}
+                ";
+
+            return await session.ExecuteDataQuery(
+                query: query,
+                txControl: TxControl.BeginSerializableRW().Commit(),
+                parameters: new Dictionary<string, YdbValue>
+                {
+                }
+            );
+            });
+            response.Wait();
+            ExecuteDataQueryResponse resp = (ExecuteDataQueryResponse)response.Result;
+            var x = resp.Result.ResultSets[0].Rows;
+            string s = "";
+            List<StationPrice_JsonByStationId> stationPrices = new List<StationPrice_JsonByStationId>();
+            for(int z = 0;z < x.Count();z++){
+            StationPrice_JsonByStationId stationPrice = new StationPrice_JsonByStationId(
+                x[z][0].GetOptional().GetUint64(),
+                x[z][1].GetOptional().GetUint64(),
+                x[z][2].GetOptional().GetUint64(),
+                x[z][3].GetOptional().GetDouble());
+                stationPrices.Add(stationPrice);           
+            }
+            return stationPrices;
+        }
     }
 }

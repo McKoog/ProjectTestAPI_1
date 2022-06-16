@@ -1,13 +1,11 @@
-using System.Xml;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Mvc;
 using ProjectTestAPI_1.Services;
 using Ydb.Sdk.Client;
 using Ydb.Sdk.Table;
-using Ydb.Sdk.Value;
 using ProjectTestAPI_1.YQL;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ProjectTestAPI_1.Controllers;
 
@@ -25,6 +23,7 @@ namespace ProjectTestAPI_1.Controllers;
         }
         [HttpPost]
         [Route("CreateStation")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "administrator")]
         public Task<IResponse> CreateStation(
             [Required()]ulong id,
             [Required()]bool enable,
@@ -38,12 +37,14 @@ namespace ProjectTestAPI_1.Controllers;
             
         [HttpGet]
         [Route("GetStation")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "administrator,standart")]
         public string GetStation([Required()]ulong id){
             return yql.GetStation(id);
         }
 
         [HttpGet]
         [Route("GetStations")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "administrator,standart")]
         public string GetStations(){
             return yql.GetStations();
         }

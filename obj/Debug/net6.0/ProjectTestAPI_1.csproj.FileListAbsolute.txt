@@ -170,3 +170,11 @@ C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6
 C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\podrezov\Downloads\ProjectsGIT-WorkHome\ProjectTestAPI_1\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

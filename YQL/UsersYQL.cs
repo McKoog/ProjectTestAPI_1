@@ -14,7 +14,7 @@ namespace ProjectTestAPI_1.YQL
             this.client = client;
         }
         private TableClient client = MyYDBService.Client;
-        public string RegisterUser(ulong userId, string name, string email, string password, string phone, string token){
+        public string RegisterUser(ulong userId, string name, string email, string password, string phone, string token, string role){
             string fuelType = "АИ-92";
             string fuelSize = "10";
 
@@ -29,9 +29,10 @@ namespace ProjectTestAPI_1.YQL
                     DECLARE $token as Utf8;
                     DECLARE $fuelType as Utf8;
                     DECLARE $fuelSize as Utf8;
+                    DECLARE $role as Utf8;
 
-                    UPSERT INTO Users (user_id, name, email, password, phone, token, fuelType, fuelSize) VALUES
-                    ($user_id, $name, $email, $password, $phone, $token, $fuelType, $fuelSize);
+                    UPSERT INTO Users (user_id, name, email, password, phone, token, fuelType, fuelSize, role) VALUES
+                    ($user_id, $name, $email, $password, $phone, $token, $fuelType, $fuelSize, $role);
                 ";
 
             return await session.ExecuteDataQuery(
@@ -47,17 +48,18 @@ namespace ProjectTestAPI_1.YQL
                     { "$token", YdbValue.MakeUtf8(token) },
                     { "$fuelType", YdbValue.MakeUtf8(fuelType) },
                     { "$fuelSize", YdbValue.MakeUtf8(fuelSize) },
+                    { "$role", YdbValue.MakeUtf8(role) },
                 }
             );
             });
             return token;
         }
-        public string LoginUser(string email, string password)
+        public User LoginUser(string email, string password)
         {
             var response =  client.SessionExec(async session =>
                 {
                     var query = @$"
-                    SELECT token FROM Users WHERE email = '{email}' AND password = '{password}'
+                    SELECT user_id,name,email,phone,token,role FROM Users WHERE email = '{email}' AND password = '{password}'
                 ";
 
             return await session.ExecuteDataQuery(
@@ -72,9 +74,16 @@ namespace ProjectTestAPI_1.YQL
             ExecuteDataQueryResponse resp = (ExecuteDataQueryResponse)response.Result;
             var x = resp.Result.ResultSets[0].Rows;
             if(resp.Result.ResultSets[0].Rows.Count<ResultSet.Row>() != 0){
-            return x[0][0].GetOptionalUtf8().ToString();
+            User user = new User(
+                x[0][0].GetOptional().GetUint64(),
+                x[0][1].GetOptionalUtf8().ToString(),
+                x[0][2].GetOptionalUtf8().ToString(),
+                x[0][3].GetOptionalUtf8().ToString(),
+                x[0][4].GetOptionalUtf8().ToString(),
+                x[0][5].GetOptionalUtf8().ToString());
+            return user;
             }
-            else return "";
+            else return null;
         }
         public string GetUserSettingsFromToken(string token)
         {
@@ -125,6 +134,35 @@ namespace ProjectTestAPI_1.YQL
             );
             });
             return response;
+        }
+
+        public UserAuthorizeData GetUserAuthorizeData(string token){
+             var response =  client.SessionExec(async session =>
+                {
+                    var query = @$"
+                    SELECT user_id,name,email,phone,role FROM Users WHERE token = '{token}'
+                ";
+
+            return await session.ExecuteDataQuery(
+                query: query,
+                txControl: TxControl.BeginSerializableRW().Commit(),
+                parameters: new Dictionary<string, YdbValue>
+                {
+                }
+            );
+            });
+            response.Wait();
+            ExecuteDataQueryResponse resp = (ExecuteDataQueryResponse)response.Result;
+            var x = resp.Result.ResultSets[0].Rows;
+            UserAuthorizeData userData = new UserAuthorizeData(
+                x[0][0].GetOptional().GetUint64(),
+                x[0][1].GetOptionalUtf8().ToString(),
+                x[0][2].GetOptionalUtf8().ToString(),
+                x[0][3].GetOptionalUtf8().ToString(),
+                token,
+                x[0][4].GetOptionalUtf8().ToString());
+
+                return userData;
         }
         
     }

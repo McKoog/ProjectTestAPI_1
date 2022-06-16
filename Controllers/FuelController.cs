@@ -1,13 +1,11 @@
-using System.Xml;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Mvc;
 using ProjectTestAPI_1.Services;
 using Ydb.Sdk.Client;
 using Ydb.Sdk.Table;
-using Ydb.Sdk.Value;
 using ProjectTestAPI_1.YQL;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ProjectTestAPI_1.Controllers
 {
@@ -27,6 +25,7 @@ namespace ProjectTestAPI_1.Controllers
 
     [HttpPost]
     [Route("CreateFuel")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "administrator")]
         public Task<IResponse> CreateFuel(
             [Required()] ulong id,
             [Required()] string name,
@@ -38,6 +37,7 @@ namespace ProjectTestAPI_1.Controllers
 
     [HttpGet]
     [Route("GetFuel")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "administrator,standart")]
         public string GetFuel([Required()] ulong id)
         {
             return yql.GetFuel(id);
@@ -45,6 +45,7 @@ namespace ProjectTestAPI_1.Controllers
 
     [HttpGet]
     [Route("GetFuels")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "administrator,standart")]
         public string GetFuels()
         {
             return yql.GetFuels();

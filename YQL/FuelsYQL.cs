@@ -1,4 +1,3 @@
-using System.Text;
 using System.Text.Json;
 using ProjectTestAPI_1.Services;
 using Ydb.Sdk.Client;
