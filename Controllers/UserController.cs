@@ -48,7 +48,12 @@ namespace ProjectTestAPI_1.Controllers
             [Required()]string password)
         {
             var loggedUser = yql.LoginUser(email,password);
+            if(loggedUser != null){
             return loggedUser.Token;
+            }
+            else{
+                return "";
+            }
         }
         [HttpGet]
         [Route("AuthorizeApiUser")]

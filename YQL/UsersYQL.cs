@@ -17,7 +17,9 @@ namespace ProjectTestAPI_1.YQL
         public string RegisterUser(ulong userId, string name, string email, string password, string phone, string token, string role){
             string fuelType = "АИ-92";
             string fuelSize = "10";
-
+            if(role == null){
+            role = "standart";
+            }
             var response =  client.SessionExec(async session =>
                 {
                     var query = @"
@@ -73,7 +75,8 @@ namespace ProjectTestAPI_1.YQL
             response.Wait();
             ExecuteDataQueryResponse resp = (ExecuteDataQueryResponse)response.Result;
             var x = resp.Result.ResultSets[0].Rows;
-            if(resp.Result.ResultSets[0].Rows.Count<ResultSet.Row>() != 0){
+            var m = x.Count();
+            if(x.Count() != 0){
             User user = new User(
                 x[0][0].GetOptional().GetUint64(),
                 x[0][1].GetOptionalUtf8().ToString(),
